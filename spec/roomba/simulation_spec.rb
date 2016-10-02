@@ -75,7 +75,7 @@ describe Roomba::Simulation do
       end
     end
 
-    context '.run_hoover_commands', :go do
+    context '.run_hoover_commands' do
       context 'with correct objects setup' do
         it 'calls .run_commands on object hoover' do
           simulation.process_lines(valid_lines)
@@ -87,7 +87,7 @@ describe Roomba::Simulation do
       end
     end
 
-    context '.print_result', :go do
+    context '.print_result' do
       context 'with valid hoover' do
         it 'prints hoover position' do
           simulation.process_lines(valid_lines)
