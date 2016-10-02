@@ -1,41 +1,67 @@
 # Roomba
+Ruby roomba simulation project.
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/roomba`. To experiment with that code, run `bin/console` for an interactive prompt.
+# Description
+Program that navigates a imaginary robotic hoover (much like a Roomba) through an equally imaginary room based on:
 
-TODO: Delete this and the text above, and describe your gem
+- room dimensions as X and Y coordinates, identifying the top right corner of the room rectangle. This room is divided up in a grid based on these dimensions; a room that has dimensions X: 5 and Y: 5 has 5 columns and 5 rows, so 25 possible hoover positions. The bottom left corner is the point of origin for our coordinate system, so as the room contains all coordinates its bottom left corner is defined by X: 0 and Y: 0.
+- locations of patches of dirt, also defined by X and Y coordinates identifying the bottom left corner of those grid positions.
+- an initial hoover position (X and Y coordinates like patches of dirt)
+- driving instructions (as cardinal directions where e.g. N and E mean "go north" and "go east" respectively)
 
-## Installation
+The room will be rectangular, has no obstacles (except the room walls), no doors and all locations in the room will be clean (hoovering has no effect) except for the locations of the patches of dirt presented in the program input.
 
-Add this line to your application's Gemfile:
+Placing the hoover on a patch of dirt ("hoovering") removes the patch of dirt so that patch is then clean for the remainder of the program run. The hoover is always on - there is no need to enable it.
 
-```ruby
-gem 'roomba'
+Driving into a wall has no effect (the robot skids in place).
+
+# output
+
+- The final hoover position (X, Y)
+- The number of patches of dirt the robot cleaned up
+
+
+## Input
+
+Program receives a file with the format described here.
+
+The file will be named `input.txt` and reside in the same directory as your executable program / web page.
+
+Example:
+
+```
+5 5
+1 2
+1 0
+2 2
+2 3
+NNESEESWNWW
 ```
 
-And then execute:
-
-    $ bundle
-
-Or install it yourself as:
-
-    $ gem install roomba
-
-## Usage
-
-TODO: Write usage instructions here
-
-## Development
-
-After checking out the repo, run `bin/setup` to install dependencies. Then, run `rake spec` to run the tests. You can also run `bin/console` for an interactive prompt that will allow you to experiment.
-
-To install this gem onto your local machine, run `bundle exec rake install`. To release a new version, update the version number in `version.rb`, and then run `bundle exec rake release`, which will create a git tag for the version, push git commits and tags, and push the `.gem` file to [rubygems.org](https://rubygems.org).
-
-## Contributing
-
-Bug reports and pull requests are welcome on GitHub at https://github.com/[USERNAME]/roomba. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [Contributor Covenant](http://contributor-covenant.org) code of conduct.
+* the first line holds the room dimensions (X Y), separated by a single space (all coordinates will be presented in this format)
+* the second line holds the hoover position
+* subsequent lines contain the zero or more positions of patches of dirt (one per line)
+* the next line then always contains the driving instructions (at least one)
 
 
-## License
 
-The gem is available as open source under the terms of the [MIT License](http://opensource.org/licenses/MIT).
+# Assumptions
 
+ - duplicated patches positions will be counted once in the cleaned patches number
+ - if there is a patch on hoover initial position it will clean first thing when it runs
+
+# For Development
+
+ run while on project folder
+
+ ```
+ ./bin/setup
+ ```
+
+# To run simulation
+
+```
+ruby ./bin/run.rb 'bin/input.txt'
+```
+
+while on project folder and make sure ruby is installed
