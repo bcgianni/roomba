@@ -20,12 +20,12 @@ describe Roomba::Simulation do
   end
   let(:expected_hoover) do
     Roomba::Hoover.new(expected_setup_hash[:hoover_position],
-                     expected_setup_hash[:hoover_commands],
-                     room)
+                       expected_setup_hash[:hoover_commands],
+                       room)
   end
-  let(:expected_room_dimension) { {x:4, y:4} }
+  let(:expected_room_dimension) { { x: 4, y: 4 } }
   let(:expected_list_of_dirt) { expected_setup_hash[:list_of_dirt] }
-  let(:expected_hoover_position) { {x:1, y:2} }
+  let(:expected_hoover_position) { { x: 1, y: 2 } }
 
   context '.run_simulation' do
     context 'when providing a valid input file' do
@@ -45,7 +45,6 @@ describe Roomba::Simulation do
 
   context '.process_lines' do
     context 'when providing a valid input file' do
-
       it 'correctly structures the setup hash' do
         simulation.process_lines(valid_lines)
         expect(simulation.instance_variable_get(:@setup)).to eq expected_setup_hash
@@ -55,7 +54,6 @@ describe Roomba::Simulation do
 
   context '.create_objects' do
     context 'with valid setup' do
-
       it 'creates room object correctly' do
         simulation.process_lines(valid_lines)
         simulation.create_objects
@@ -79,13 +77,13 @@ describe Roomba::Simulation do
 
     context '.run_hoover_commands', :go do
       context 'with correct objects setup' do
-          it 'calls .run_commands on object hoover' do
-            simulation.process_lines(valid_lines)
-            simulation.create_objects
-            hoover = simulation.instance_variable_get(:@hoover)
-            expect(hoover).to receive(:run_commands)
-            simulation.run_hoover_commands
-          end
+        it 'calls .run_commands on object hoover' do
+          simulation.process_lines(valid_lines)
+          simulation.create_objects
+          hoover = simulation.instance_variable_get(:@hoover)
+          expect(hoover).to receive(:run_commands)
+          simulation.run_hoover_commands
+        end
       end
     end
 
@@ -98,7 +96,6 @@ describe Roomba::Simulation do
         end
       end
     end
-
   end
 
   # let(:dummy_class) { Class.new { include Roomba } }
