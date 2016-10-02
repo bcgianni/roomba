@@ -11,7 +11,7 @@ module Roomba
 
     def run_commands
       clean
-      @set_of_commands[0].split("").each do |command|
+      @set_of_commands[0].split('').each do |command|
         case command
         when 'N' then go_north
         when 'E' then go_east
